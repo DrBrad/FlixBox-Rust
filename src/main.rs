@@ -2,12 +2,45 @@ use std::process::exit;
 use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, WindowType};
 use gdk_pixbuf::Pixbuf;
 
-fn main() {
+mod ui {
+
+    pub mod int {
+        pub mod activity;
+    }
+}
+
+// Use the MyClass struct from the my_class module
+use ui::int::activity::Activity;
+
+fn main(){
+
+
+
+
+    gtk::init().unwrap();
+
+    let window = gtk::Window::new(WindowType::Toplevel);
+    //init_css(&window);
+    window.set_title("FlixBox");
+    window.set_default_size(1280, 720);
+    window.set_resizable(true);
+    window.connect_destroy(|_|exit(0));
+
+
+    let activity = Activity::new(window);
+
+
+    window.show_all();
+
+
+    /*
     gtk::init().unwrap();
     init_window();
     gtk::main();
+    */
 }
 
+/*
 fn init_css(window: &gtk::Window){
     let css = CssProvider::new();
     css.load_from_path("res/styles/main.css").unwrap();
@@ -58,3 +91,4 @@ fn add_nav_button(left_nav: &gtk::Box, image_path: &str){
     button.set_image(Some(&Image::from_pixbuf(Some(&Pixbuf::from_file_at_scale(image_path, 32, 32, true).unwrap()))));
     left_nav.add(&button);
 }
+*/
