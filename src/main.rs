@@ -3,44 +3,46 @@ use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Im
 use gdk_pixbuf::Pixbuf;
 
 mod ui {
-
     pub mod int {
         pub mod activity;
     }
+    pub mod fragments {
+        pub mod main_activity;
+    }
 }
 
-// Use the MyClass struct from the my_class module
+use ui::fragments::main_activity::MainActivity;
 use ui::int::activity::Activity;
 
 fn main(){
 
+    let activity = MainActivity::new("Buddy".to_string());
+    activity.onCreate();
 
-
-
+    /*
     gtk::init().unwrap();
 
+
+
     let window = gtk::Window::new(WindowType::Toplevel);
-    //init_css(&window);
+    init_css(&window);
     window.set_title("FlixBox");
     window.set_default_size(1280, 720);
     window.set_resizable(true);
     window.connect_destroy(|_|exit(0));
 
 
-    let activity = Activity::new(window);
+    //CREATE ACTIVITY - ACTIVITY WILL CALL onCreate() with a new PANE BEING THE ACTIVITY
+    //let activity = Activity::new(&window);
+    //activity.test();
+
 
 
     window.show_all();
-
-
-    /*
-    gtk::init().unwrap();
-    init_window();
     gtk::main();
     */
 }
 
-/*
 fn init_css(window: &gtk::Window){
     let css = CssProvider::new();
     css.load_from_path("res/styles/main.css").unwrap();
@@ -49,6 +51,7 @@ fn init_css(window: &gtk::Window){
     gtk::StyleContext::add_provider_for_screen(&screen, &css, gtk::STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
+/*
 fn init_window(){
     let window = gtk::Window::new(WindowType::Toplevel);
     init_css(&window);
