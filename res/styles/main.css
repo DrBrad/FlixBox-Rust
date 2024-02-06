@@ -1,0 +1,47 @@
+/*
+:root {
+    --primary: #fcba03;
+    --secondary: #fcc630;
+    --background: #040c17;
+    --background-secondary: #141c27;
+    --background-shimmer: #242c37;
+    --text-primary: #e6e6e6;
+    --text-secondary: #b3b3b3;
+    --white: #ffffff;
+    --black: #000000;
+    --select-color: #40ffffff;
+    --ripple: #666666;
+    --error: #f55442;
+}
+*/
+
+window {
+    background-color: #040c17;
+}
+
+/*
+window * {
+    color: #e6b800;
+    padding: 0;
+    margin: 0;
+}
+*/
+#left_nav {
+    background-color: #141c27;
+}
+
+#left_nav button {
+    /*color: #e6b800;*/
+    background-image: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#left_nav button:hover {
+    background-color: #242c37;
+}
+
+/*
+*/
