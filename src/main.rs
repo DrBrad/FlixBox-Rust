@@ -1,8 +1,10 @@
 use std::process::exit;
+use gdk::WindowExt;
 use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, WindowType};
 
 mod ui {
     pub mod main_activity;
+    pub mod latest_activity;
 
     pub mod int {
         pub mod activity;
@@ -11,6 +13,7 @@ mod ui {
 
 
 use ui::main_activity::MainActivity;
+use ui::latest_activity::LatestActivity;
 use ui::int::activity::Activity;
 
 fn main(){
@@ -32,20 +35,25 @@ fn main(){
     window.add(&root);
 
 
-    let a = gtk::Box::new(Orientation::Horizontal, 0);
-    root.add(&a);
+    //let a = gtk::Box::new(Orientation::Horizontal, 0);
+    //root.add(&a);
 
 
-    //let activity = MainActivity::new(root);
-    //activity.on_create();
+    let activity = MainActivity::new(&window, root);
+    activity.on_create();
 
     window.show_all();
-    gtk::main();
 
     //let b = gtk::Box::new(Orientation::Horizontal, 0);
-    let w = a.get_parent();
-    w.remove(&a);
+    //let w: gtk::Window = a.get_toplevel().unwrap();
+    //println!("Title: {}", w.get_title().unwrap());
+    //w.remove(&a);
     //root.add(&b);
+
+    let a: LatestActivity = activity.start_activity();
+    a.on_destroy();
+
+    gtk::main();
 }
 
 fn init_css(window: &gtk::Window){

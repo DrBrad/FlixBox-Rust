@@ -2,12 +2,12 @@ use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Im
 use gdk_pixbuf::Pixbuf;
 use crate::ui::int::activity::Activity;
 
-pub struct MainActivity<'a> {
+pub struct LatestActivity<'a> {
     window: &'a gtk::Window,
     root_pane: gtk::Box
 }
 
-impl<'a> MainActivity<'a> {
+impl<'a> LatestActivity<'a> {
 
     fn add_nav_button(left_nav: &gtk::Box, image_path: &str){
         let button = gtk::Button::new();
@@ -19,10 +19,10 @@ impl<'a> MainActivity<'a> {
     }
 }
 
-impl<'a> Activity<'a> for MainActivity<'a> {
+impl<'a> Activity<'a> for LatestActivity<'a> {
 
-    fn new(window: &'a gtk::Window, root_pane: gtk::Box) -> MainActivity<'a> {
-        MainActivity {
+    fn new(window: &'a gtk::Window, root_pane: gtk::Box) -> LatestActivity<'a> {
+        LatestActivity {
             window,
             root_pane
         }
@@ -30,19 +30,10 @@ impl<'a> Activity<'a> for MainActivity<'a> {
 
     fn on_create(&self){
         println!("Created");
+    }
 
-        let parent = gtk::Box::new(Orientation::Horizontal, 2);
-        self.root_pane.add(&parent);
-
-        let left_nav = gtk::Box::new(Orientation::Vertical, 3);
-        left_nav.set_widget_name("left_nav");
-        left_nav.set_property_width_request(62);
-
-        MainActivity::add_nav_button(&left_nav, "res/drawables/ic_home.svg");
-        MainActivity::add_nav_button(&left_nav, "res/drawables/ic_latest.svg");
-        MainActivity::add_nav_button(&left_nav, "res/drawables/ic_settings.svg");
-
-        parent.add(&left_nav);
+    fn on_destroy(&self){
+        println!("Latest Destroy");
     }
 
     fn get_window(&self) -> &'a gtk::Window {
