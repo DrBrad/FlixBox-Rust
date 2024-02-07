@@ -2,15 +2,16 @@ use std::process::exit;
 use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, WindowType};
 
 mod ui {
+    pub mod main_activity;
+
     pub mod int {
         pub mod activity;
     }
-    pub mod fragments {
-        pub mod main_activity;
-    }
+    pub mod fragments {}
 }
 
-use ui::fragments::main_activity::MainActivity;
+
+use ui::main_activity::MainActivity;
 use ui::int::activity::Activity;
 
 fn main(){
