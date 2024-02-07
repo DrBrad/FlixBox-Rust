@@ -1,13 +1,10 @@
 use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, Window, WindowType};
 use gdk_pixbuf::Pixbuf;
-/*
-use crate::ui::int::activity::Activity;
-*/
 
-// Now you can use the imported modules
-use crate::ui::int::activity::Activity;
-use crate::ui::int::fragment::Fragment;
-//use crate::ui::fragments::home_fragment::HomeFragment;
+use ui::int::activity::Activity;
+use ui::int::fragment::Fragment;
+use ui::fragments::home_fragment::HomeFragment;
+use crate::ui;
 
 
 pub struct MainActivity<'a> {
@@ -55,8 +52,8 @@ impl<'a> Activity<'a> for MainActivity<'a> {
         let fragment_root = gtk::Box::new(Orientation::Horizontal, 0);
         parent.add(&fragment_root);
 
-        //let home = HomeFragment::new(parent, &fragment_root);
-        //home.onCreate();
+        let home = HomeFragment::new(&parent, fragment_root);
+        home.on_create();
     }
 
     fn get_window(&self) -> &'a gtk::Window {

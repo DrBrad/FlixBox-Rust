@@ -1,20 +1,11 @@
+mod ui;
+
 use std::process::exit;
 use gdk::WindowExt;
 use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, WindowType};
 
-mod ui {
-    pub mod main_activity;
-    //pub mod latest_activity;
-
-    pub mod int {
-        pub mod activity;
-    }
-}
-
-
-use ui::main_activity::MainActivity;
-//use ui::latest_activity::LatestActivity;
-use ui::int::activity::Activity;
+pub use ui::int::activity::Activity;
+pub use ui::main_activity::MainActivity;
 
 fn main(){
     gtk::init().unwrap();
