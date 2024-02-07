@@ -50,8 +50,8 @@ fn main(){
     //w.remove(&a);
     //root.add(&b);
 
-    let a: LatestActivity = activity.start_activity();
-    a.on_destroy();
+    //let a: LatestActivity = activity.start_activity();
+    //a.on_destroy();
 
     gtk::main();
 }

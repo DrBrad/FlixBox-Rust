@@ -32,6 +32,8 @@ pub trait Activity<'a> {
         window.remove(self.get_root());
         let new_root = gtk::Box::new(Orientation::Horizontal, 0);
         window.add(&new_root);
-        T::new(window, new_root)
+        let activity = T::new(window, new_root);
+        activity.on_create();
+        activity
     }
 }
