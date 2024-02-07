@@ -31,6 +31,8 @@ pub trait Activity<'a> {
         let window = self.get_window();
         window.remove(self.get_root());
         let new_root = gtk::Box::new(Orientation::Horizontal, 0);
+        new_root.set_hexpand(true);
+        new_root.set_vexpand(true);
         window.add(&new_root);
         let activity = T::new(window, new_root);
         activity.on_create();

@@ -43,5 +43,6 @@ window * {
     background-color: #242c37;
 }
 
-/*
-*/
+#splash {
+    background-color: red;
+}

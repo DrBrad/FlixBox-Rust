@@ -19,6 +19,8 @@ fn main(){
 
     //CAN WE SOMEHOW MAKE THIS A FUNCTION...
     let root = gtk::Box::new(Orientation::Horizontal, 0);
+    root.set_hexpand(true);
+    root.set_vexpand(true);
     window.add(&root);
 
     let activity = MainActivity::new(&window, root);
