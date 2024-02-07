@@ -1,4 +1,4 @@
-use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, OrientableExt, Orientation, WidgetExt, Window, WindowType};
+use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, ImageExt, OrientableExt, Orientation, WidgetExt, Window, WindowType};
 use gdk_pixbuf::Pixbuf;
 use crate::ui::int::fragment::Fragment;
 
@@ -11,9 +11,15 @@ impl<'a> HomeFragment<'a> {
 
     fn add_header(scroll_root: &gtk::Box){
         let root = gtk::Box::new(Orientation::Horizontal, 0);
-        root.set_widget_name("splash");
+        root.set_widget_name("header");
         root.set_property_width_request(200);
         root.set_property_height_request(500);
+
+
+        let image = gtk::Image::new();
+        image.set_from_pixbuf(Some(&Pixbuf::from_file("/var/www/images/landscape/d04f148795a31c4c0723e49fe635ec5e297aba89a76ae73060eb1b031609f7fd.jpg").unwrap()));
+        root.add(&image);
+
 
         scroll_root.add(&root);
 

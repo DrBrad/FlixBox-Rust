@@ -43,11 +43,15 @@ scrollbar.vertical slider, scrollbar.horizontal slider {
     margin: 0;
 }
 
+#left_nav button.selected {
+    background-color: #242c37;
+}
+
 #left_nav button:hover {
     background-color: #242c37;
 }
 
-#splash {
+#header {
     background-color: #242c37;
 }
 
