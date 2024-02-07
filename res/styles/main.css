@@ -53,8 +53,10 @@ scrollbar.vertical slider, scrollbar.horizontal slider {
 
 #header {
     background-color: #242c37;
+    background-image: url("/var/www/images/landscape/d04f148795a31c4c0723e49fe635ec5e297aba89a76ae73060eb1b031609f7fd.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
-#splash2 {
-    background-color: green;
-}
+
