@@ -7,7 +7,6 @@ mod ui {
     pub mod int {
         pub mod activity;
     }
-    pub mod fragments {}
 }
 
 
