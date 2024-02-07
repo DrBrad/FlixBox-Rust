@@ -31,11 +31,21 @@ fn main(){
     let root = gtk::Box::new(Orientation::Horizontal, 0);
     window.add(&root);
 
-    let activity = MainActivity::new(root);
-    activity.on_create();
+
+    let a = gtk::Box::new(Orientation::Horizontal, 0);
+    root.add(&a);
+
+
+    //let activity = MainActivity::new(root);
+    //activity.on_create();
 
     window.show_all();
     gtk::main();
+
+    //let b = gtk::Box::new(Orientation::Horizontal, 0);
+    let w = a.get_parent();
+    w.remove(&a);
+    //root.add(&b);
 }
 
 fn init_css(window: &gtk::Window){
