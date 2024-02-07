@@ -9,6 +9,24 @@ pub struct HomeFragment<'a> {
 
 impl<'a> HomeFragment<'a> {
 
+    fn add_header(scroll_root: &gtk::Box){
+        let root = gtk::Box::new(Orientation::Horizontal, 0);
+        root.set_widget_name("splash");
+        root.set_property_width_request(200);
+        root.set_property_height_request(500);
+
+        scroll_root.add(&root);
+
+    }
+
+    fn add_list(scroll_root: &gtk::Box){
+        let root = gtk::Box::new(Orientation::Horizontal, 0);
+        root.set_widget_name("splash2");
+        root.set_property_width_request(200);
+        root.set_property_height_request(500);
+
+        scroll_root.add(&root);
+    }
 }
 
 impl<'a> Fragment<'a> for HomeFragment<'a> {
@@ -26,8 +44,11 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         //self.parent.set_widget_name("splash2");
         //self.parent.set_orientation(Orientation::Vertical);
 
-        let scrolled_window = gtk::ScrolledWindow::new(gtk::NONE_ADJUSTMENT, gtk::NONE_ADJUSTMENT);
-        scrolled_window.set_hexpand(true);
+        let scrolled_pane = gtk::ScrolledWindow::new(gtk::NONE_ADJUSTMENT, gtk::NONE_ADJUSTMENT);
+        scrolled_pane.set_hexpand(true);
+
+        let scrolled_root = gtk::Box::new(Orientation::Vertical, 0);
+        scrolled_pane.add(&scrolled_root);
         //scrolled_window.set_hscrollbar_policy(gtk::PolicyType::Always);
         //scrolled_window.set_vscrollbar_policy(gtk::PolicyType::Automatic);
 
@@ -46,7 +67,10 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         scrolled_window.add(&list_box);
         */
 
-        self.root_pane.add(&scrolled_window);
+        HomeFragment::add_header(&scrolled_root);
+        HomeFragment::add_list(&scrolled_root);
+
+        self.root_pane.add(&scrolled_pane);
 
         /*
         let splash = gtk::Box::new(Orientation::Horizontal, 0);

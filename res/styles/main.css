@@ -26,6 +26,10 @@ window * {
     margin: 0;
 }
 */
+scrollbar.vertical slider, scrollbar.horizontal slider {
+    background-color: #fcba03;
+}
+
 #left_nav {
     background-color: #141c27;
 }
@@ -45,4 +49,8 @@ window * {
 
 #splash {
     background-color: #242c37;
+}
+
+#splash2 {
+    background-color: green;
 }
