@@ -2,18 +2,11 @@ use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Im
 use gdk_pixbuf::Pixbuf;
 use crate::ui::int::activity::Activity;
 
-
 pub struct MainActivity {
-    root: gtk::Box,
+    root_pane: gtk::Box,
 }
 
 impl MainActivity {
-
-    pub fn new(root: gtk::Box) -> MainActivity {
-        MainActivity {
-            root
-        }
-    }
 
     fn add_nav_button(left_nav: &gtk::Box, image_path: &str){
         let button = gtk::Button::new();
@@ -26,12 +19,20 @@ impl MainActivity {
 }
 
 impl Activity for MainActivity {
+    
+    //type RootPane = gtk::Box;
 
-    fn onCreate(&self){
+    fn new(root_pane: gtk::Box) -> MainActivity {
+        MainActivity {
+            root_pane
+        }
+    }
+
+    fn on_create(&self){
         println!("Created");
 
         let parent = gtk::Box::new(Orientation::Horizontal, 2);
-        self.root.add(&parent);
+        self.root_pane.add(&parent);
 
         let left_nav = gtk::Box::new(Orientation::Vertical, 3);
         left_nav.set_widget_name("left_nav");
@@ -43,36 +44,13 @@ impl Activity for MainActivity {
 
         parent.add(&left_nav);
     }
+
+    //fn get_root(&self) -> &gtk::Box {
+    //    &self.root_pane.clone()
+    //}
+
+
+    //fn getRootPane(&self) -> &Self::RootPane {
+    //    &self.root_pane
+    //}
 }
-
-/*
-pub struct Activity {
-    window: gtk::Window
-}
-
-impl Activity {
-
-    pub fn new(window: &gtk::Window) -> Activity {
-        Activity {
-            window: window.clone()
-        }
-    }
-
-    pub fn test(&self){
-        println!("Hello World");
-        //let parent = gtk::Box::new(Orientation::Horizontal, 2);
-        //self.window.add(&parent);
-
-        //let left_nav = gtk::Box::new(Orientation::Vertical, 3);
-        //left_nav.set_widget_name("left_nav");
-        //left_nav.set_property_width_request(62);
-    }
-
-    //onCreate
-    //onResume
-    //onPause
-    //onDestroy
-
-
-}
-*/
