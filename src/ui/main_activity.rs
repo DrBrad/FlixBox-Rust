@@ -40,7 +40,6 @@ impl<'a> Activity<'a> for MainActivity<'a> {
         self.root_pane.add(&parent);
 
         let left_nav = gtk::Box::new(Orientation::Vertical, 0);
-        left_nav.set_vexpand(true);
         left_nav.set_widget_name("left_nav");
         left_nav.set_property_width_request(62);
 
@@ -51,8 +50,6 @@ impl<'a> Activity<'a> for MainActivity<'a> {
         parent.add(&left_nav);
 
         let fragment_root = gtk::Box::new(Orientation::Horizontal, 0);
-        fragment_root.set_hexpand(true);
-        fragment_root.set_vexpand(true);
         parent.add(&fragment_root);
 
         let home = HomeFragment::new(&parent, fragment_root);
