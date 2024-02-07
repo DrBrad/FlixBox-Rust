@@ -17,32 +17,14 @@ fn main(){
     window.set_resizable(true);
     window.connect_destroy(|_|exit(0));
 
-    //NOT SURE HOW TO USE JUST THE FUCKING WINDOW SO THIS WILL DO...
-    //let window_root = gtk::Box::new(Orientation::Horizontal, 0);
-    //window.add(&window_root);
-
     //CAN WE SOMEHOW MAKE THIS A FUNCTION...
     let root = gtk::Box::new(Orientation::Horizontal, 0);
     window.add(&root);
-
-
-    //let a = gtk::Box::new(Orientation::Horizontal, 0);
-    //root.add(&a);
-
 
     let activity = MainActivity::new(&window, root);
     activity.on_create();
 
     window.show_all();
-
-    //let b = gtk::Box::new(Orientation::Horizontal, 0);
-    //let w: gtk::Window = a.get_toplevel().unwrap();
-    //println!("Title: {}", w.get_title().unwrap());
-    //w.remove(&a);
-    //root.add(&b);
-
-    //let a: LatestActivity = activity.start_activity();
-    //a.on_destroy();
 
     gtk::main();
 }

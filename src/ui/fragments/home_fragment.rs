@@ -22,6 +22,9 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
 
     fn on_create(&self){
         println!("Created frag");
+
+
+
     }
 
     fn get_parent(&self) -> &'a gtk::Box {
