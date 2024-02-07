@@ -4,7 +4,7 @@ use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Im
 
 mod ui {
     pub mod main_activity;
-    pub mod latest_activity;
+    //pub mod latest_activity;
 
     pub mod int {
         pub mod activity;
@@ -13,7 +13,7 @@ mod ui {
 
 
 use ui::main_activity::MainActivity;
-use ui::latest_activity::LatestActivity;
+//use ui::latest_activity::LatestActivity;
 use ui::int::activity::Activity;
 
 fn main(){
