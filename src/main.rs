@@ -16,10 +16,7 @@ use ui::int::activity::Activity;
 
 fn main(){
 
-    let activity = MainActivity::new("Buddy".to_string());
-    activity.onCreate();
 
-    /*
     gtk::init().unwrap();
 
 
@@ -32,15 +29,15 @@ fn main(){
     window.connect_destroy(|_|exit(0));
 
 
-    //CREATE ACTIVITY - ACTIVITY WILL CALL onCreate() with a new PANE BEING THE ACTIVITY
-    //let activity = Activity::new(&window);
-    //activity.test();
+    let root = gtk::Box::new(Orientation::Horizontal, 0);
+    window.add(&root);
 
+    let activity = MainActivity::new(root);
+    activity.onCreate();
 
 
     window.show_all();
     gtk::main();
-    */
 }
 
 fn init_css(window: &gtk::Window){
