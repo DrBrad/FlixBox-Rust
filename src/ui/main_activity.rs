@@ -49,9 +49,9 @@ impl<'a> Activity<'a> for MainActivity<'a> {
         self.window
     }
 
-    //fn get_root(&self) -> &gtk::Box {
-    //    &self.root_pane.clone()
-    //}
+    fn get_root(&self) -> &gtk::Box {
+        &self.root_pane
+    }
 
 
     //fn getRootPane(&self) -> &Self::RootPane {

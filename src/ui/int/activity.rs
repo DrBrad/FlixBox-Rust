@@ -24,12 +24,12 @@ pub trait Activity<'a> {
 
     fn get_window(&self) -> &'a gtk::Window;
 
-    //fn get_root(&self) -> &gtk::Box;
+    fn get_root(&self) -> &gtk::Box;
 
     fn start_activity<T: Activity<'a>>(&self) -> T {
         self.on_destroy();
-        //self.get_root().remove();
         let window = self.get_window();
+        window.remove(self.get_root());
         let new_root = gtk::Box::new(Orientation::Horizontal, 0);
         window.add(&new_root);
         T::new(window, new_root)
