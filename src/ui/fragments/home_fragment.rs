@@ -23,14 +23,14 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
     fn on_create(&self){
         println!("Created frag");
 
-        //self.parent.set_widget_name("splash");
+        //self.parent.set_widget_name("splash2");
         //self.parent.set_orientation(Orientation::Vertical);
 
         let splash = gtk::Box::new(Orientation::Horizontal, 0);
         splash.set_widget_name("splash");
         splash.set_hexpand(true);
-        splash.set_vexpand(true);
-        //splash.set_property_height_request(300);
+        //splash.set_vexpand(true);
+        splash.set_property_height_request(300);
 
         /*
         let aspect_ratio = 16.0 / 9.0; // Desired aspect ratio (width / height)
@@ -46,7 +46,7 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         });
         */
 
-        self.parent.add(&splash);
+        self.root_pane.add(&splash);
     }
 
     fn get_parent(&self) -> &'a gtk::Box {
