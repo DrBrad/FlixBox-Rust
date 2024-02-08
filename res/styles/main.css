@@ -58,5 +58,10 @@ scrollbar.vertical slider, scrollbar.horizontal slider {
     background-position: center;
     background-size: cover;
 }
-
+/*
+#fixed {
+    background-color: transparent;
+    background: linear-gradient(transparent, #040c17);
+}
+*/
 
