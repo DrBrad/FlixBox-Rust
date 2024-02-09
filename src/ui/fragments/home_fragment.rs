@@ -1,5 +1,5 @@
 use gtk::prelude::*;
-use gtk::{Align, ButtonExt, ContainerExt, CssProvider, CssProviderExt, Fixed, FixedExt, GtkWindowExt, Image, ImageExt, OrientableExt, Orientation, WidgetExt, Window, WindowType};
+use gtk::{Align, ButtonExt, ContainerExt, CssProvider, CssProviderExt, Fixed, FixedExt, GtkWindowExt, Image, ImageExt, OrientableExt, Orientation, PolicyType, WidgetExt, Window, WindowType};
 use gdk_pixbuf::Pixbuf;
 use gtk::Align::{Fill, Start};
 use crate::ui::int::fragment::Fragment;
@@ -12,6 +12,7 @@ pub struct HomeFragment<'a> {
 impl<'a> HomeFragment<'a> {
 
     fn add_header(root_pane: &gtk::ScrolledWindow, list_box: &gtk::Frame){
+
         let parent = gtk::AspectFrame::new(None, 0.5, 0.5, 16.0 / 9.0, false);
         //parent.set_property_height_request(100);
         parent.set_hexpand(true);
@@ -81,12 +82,38 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
     fn on_create(&self){
         println!("Created frag");
 
+        let scrolled_pane = gtk::ScrolledWindow::new(gtk::NONE_ADJUSTMENT, gtk::NONE_ADJUSTMENT);
+        scrolled_pane.set_vexpand(true);
+        scrolled_pane.set_hexpand(true);
+        scrolled_pane.set_policy(PolicyType::Never, PolicyType::Automatic); // Allow only vertical scroll
+        self.root_pane.add(&scrolled_pane);
 
-        let aspect = gtk::Box::new(Orientation::Horizontal, 0);
+
+
+
+
+
+        let list_box = gtk::Box::new(Orientation::Vertical, 0);
+        list_box.set_vexpand(true);
+        list_box.set_hexpand(true);
+        scrolled_pane.add(&list_box);
+
+        /*
+        let aspect = gtk::Frame::new(None);
         aspect.set_hexpand(true);
         aspect.set_vexpand(true);
         aspect.set_widget_name("header");
-        self.root_pane.add(&aspect);
+        list_box.add(&aspect);
+
+        let aspect_ratio = 16.0 / 9.0;
+
+        scrolled_pane.connect_size_allocate(move |_, allocation| {
+            let width = allocation.width as f64;
+            let height = width / aspect_ratio;
+            aspect.set_size_request(allocation.width, height as i32);
+            aspect.queue_resize();
+        });
+        */
 
         //self.parent.set_widget_name("splash2");
         //self.parent.set_orientation(Orientation::Vertical);

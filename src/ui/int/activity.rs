@@ -1,4 +1,4 @@
-use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, WindowType};
+use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, StyleContextExt, WidgetExt, WindowType};
 
 pub trait Activity<'a> {
 
