@@ -11,22 +11,12 @@ pub struct HomeFragment<'a> {
 
 impl<'a> HomeFragment<'a> {
 
-    fn add_header(root_pane: &gtk::ScrolledWindow, list_box: &gtk::Frame){
-
-        let parent = gtk::AspectFrame::new(None, 0.5, 0.5, 16.0 / 9.0, false);
-        //parent.set_property_height_request(100);
-        parent.set_hexpand(true);
-        parent.set_vexpand(true);
-        parent.set_valign(Fill);
-        parent.set_halign(Fill);
-        parent.set_widget_name("header");
-
-        /*
-        let aspect = gtk::Box::new(Orientation::Horizontal, 0);
-        aspect.set_hexpand(true);
-        aspect.set_vexpand(true);
-        aspect.set_widget_name("header");
-        parent.add(&aspect);
+    fn add_header(scroll_pane: &gtk::ScrolledWindow, list_box: &gtk::Box){
+        let aspect_frame = gtk::Frame::new(None);
+        aspect_frame.set_vexpand(true);
+        aspect_frame.set_hexpand(true);
+        aspect_frame.set_widget_name("header");
+        list_box.add(&aspect_frame);
 
         let fixed = gtk::Fixed::new();//(Orientation::Horizontal, 0);
         fixed.set_hexpand(true);
@@ -34,7 +24,7 @@ impl<'a> HomeFragment<'a> {
         //fixed.set_valign(Fill);
         //fixed.set_halign(Fill);
         //parent.set_widget_name("fixed");
-        aspect.add(&fixed);
+        aspect_frame.add(&fixed);
 
         let b = gtk::Button::new();
         b.set_hexpand(true);
@@ -42,22 +32,20 @@ impl<'a> HomeFragment<'a> {
 
         fixed.put(&b, 150, 150);
 
-        list_box.add(&parent);
+        list_box.add(&aspect_frame);
 
         let aspect_ratio = 16.0 / 9.0;
-        */
 
-        /*
-        root_pane.connect_size_allocate(move |_, allocation| {
+        scroll_pane.connect_size_allocate(move |_, allocation| {
+            // Get the new width and height of the widget
             let width = allocation.width as f64;
-            let height = width / aspect_ratio;
-            parent.set_size_request(allocation.width, height as i32);
-            parent.queue_resize();
+            let height = width * (9.0 / 16.0); // Maintain a 16:9 aspect ratio
+
+            // Set the size request of the widget
+            aspect_frame.set_property_height_request(height as i32);
+            aspect_frame.queue_resize();
+            //box_layout.queue_compute_expand();
         });
-        */
-
-
-        list_box.add(&parent);
     }
 
     fn add_list(list_box: &gtk::Box){
@@ -83,29 +71,26 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         println!("Created frag");
 
 
-        let scrolled_window = gtk::ScrolledWindow::new(None::<&gtk::Adjustment>, None::<&gtk::Adjustment>);
-        scrolled_window.set_policy(gtk::PolicyType::Automatic, gtk::PolicyType::Automatic);
+        let scrolled_pane = gtk::ScrolledWindow::new(gtk::NONE_ADJUSTMENT, gtk::NONE_ADJUSTMENT);
+        scrolled_pane.set_policy(gtk::PolicyType::Never, gtk::PolicyType::Automatic);
+        //scrolled_window.set_policy(gtk::Inhibit::Horizontal);
+        //self.root_pane.add(&scrolled_window);
 
-        let box_layout = gtk::Box::new(Orientation::Vertical, 0);
-        scrolled_window.add(&box_layout);
+        let list_box = gtk::Box::new(Orientation::Vertical, 0);
+        scrolled_pane.add(&list_box);
 
-        // Header with aspect ratio 16:9
-        let header_aspect_frame = gtk::AspectFrame::new(None, 0.5, 0.5, 16.0 / 9.0, false);
-        // Fill width horizontally
-        header_aspect_frame.set_property_expand(true);
-        header_aspect_frame.set_widget_name("header");
-        // Add your header content here, for example an image
-        // let header_image = gtk::Image::new_from_file("header_image.png");
-        // header_aspect_frame.add(&header_image);
-        box_layout.add(&header_aspect_frame);
+        HomeFragment::add_header(&scrolled_pane, &list_box);
+        //HomeFragment::add_list(&list_box);
+        //HomeFragment::add_list(&list_box);
+        //HomeFragment::add_list(&list_box);
 
-        // Add labels or other content
         for i in 0..20 {
             let label = gtk::Label::new(Some(&format!("Label {}", i)));
-            box_layout.add(&label);
+            label.set_property_height_request(100);
+            list_box.add(&label);
         }
 
-        self.root_pane.add(&scrolled_window);
+        self.root_pane.add(&scrolled_pane);
 
         /*
         let flow_box = gtk::FlowBox::new();
@@ -168,10 +153,6 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         list_box.set_hexpand(true);
         scrolled_pane.add(&list_box);
 
-        //HomeFragment::add_header(&scrolled_pane, &list_box);
-        //HomeFragment::add_list(&list_box);
-        //HomeFragment::add_list(&list_box);
-        //HomeFragment::add_list(&list_box);
 
         self.root_pane.add(&scrolled_pane);
         */
