@@ -2,9 +2,15 @@ use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Im
 
 pub trait Activity<'a> {
 
-    fn new(window: &'a gtk::Window, root_pane: gtk::Box) -> Self
+    fn new(window: &'a gtk::Window) -> Self
         where
             Self: Sized; // To allow calling new only on Sized types
+
+    fn create(window: &gtk::Window) -> gtk::Frame {
+        let root = gtk::Frame::new(None);
+        window.add(&root);
+        root
+    }
 
     fn on_create(&self){
         println!("Created - PARENT");
@@ -24,17 +30,13 @@ pub trait Activity<'a> {
 
     fn get_window(&self) -> &'a gtk::Window;
 
-    fn get_root(&self) -> &gtk::Box;
+    fn get_root(&self) -> &gtk::Frame;
 
     fn start_activity<T: Activity<'a>>(&self) -> T {
         self.on_destroy();
         let window = self.get_window();
         window.remove(self.get_root());
-        let new_root = gtk::Box::new(Orientation::Horizontal, 0);
-        new_root.set_hexpand(true);
-        new_root.set_vexpand(true);
-        window.add(&new_root);
-        let activity = T::new(window, new_root);
+        let activity = T::new(window);
         activity.on_create();
         activity
     }

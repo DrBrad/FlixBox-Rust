@@ -2,7 +2,7 @@ mod ui;
 
 use std::process::exit;
 use gdk::WindowExt;
-use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, WindowType};
+use gtk::{BuildableExt, ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, WindowType};
 use gtk::prelude::BuilderExtManual;
 use std::env;
 
@@ -22,10 +22,7 @@ fn main(){
     window.set_resizable(true);
     window.connect_destroy(|_|exit(0));
 
-    let root = gtk::Box::new(Orientation::Horizontal, 0);
-    window.add(&root);
-
-    let activity = MainActivity::new(&window, root);
+    let activity = MainActivity::new(&window);
     activity.on_create();
 
     window.show_all();

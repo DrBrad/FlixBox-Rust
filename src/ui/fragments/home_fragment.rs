@@ -5,20 +5,27 @@ use gtk::Align::{Fill, Start};
 use crate::ui::int::fragment::Fragment;
 
 pub struct HomeFragment<'a> {
-    parent: &'a gtk::Box,
-    root_pane: gtk::Box
+    fragment_root: &'a gtk::Frame,
+    root_pane: gtk::Frame
 }
 
 impl<'a> HomeFragment<'a> {
 
-    fn add_header(root_pane: &gtk::ScrolledWindow, list_box: &gtk::Box){
+    fn add_header(root_pane: &gtk::ScrolledWindow, list_box: &gtk::Frame){
         let parent = gtk::AspectFrame::new(None, 0.5, 0.5, 16.0 / 9.0, false);
         //parent.set_property_height_request(100);
         parent.set_hexpand(true);
         parent.set_vexpand(true);
-        //parent.set_valign(Start);
-        //parent.set_halign(Fill);
+        parent.set_valign(Fill);
+        parent.set_halign(Fill);
         parent.set_widget_name("header");
+
+        /*
+        let aspect = gtk::Box::new(Orientation::Horizontal, 0);
+        aspect.set_hexpand(true);
+        aspect.set_vexpand(true);
+        aspect.set_widget_name("header");
+        parent.add(&aspect);
 
         let fixed = gtk::Fixed::new();//(Orientation::Horizontal, 0);
         fixed.set_hexpand(true);
@@ -26,7 +33,7 @@ impl<'a> HomeFragment<'a> {
         //fixed.set_valign(Fill);
         //fixed.set_halign(Fill);
         //parent.set_widget_name("fixed");
-        parent.add(&fixed);
+        aspect.add(&fixed);
 
         let b = gtk::Button::new();
         b.set_hexpand(true);
@@ -37,13 +44,19 @@ impl<'a> HomeFragment<'a> {
         list_box.add(&parent);
 
         let aspect_ratio = 16.0 / 9.0;
+        */
 
+        /*
         root_pane.connect_size_allocate(move |_, allocation| {
             let width = allocation.width as f64;
             let height = width / aspect_ratio;
             parent.set_size_request(allocation.width, height as i32);
             parent.queue_resize();
         });
+        */
+
+
+        list_box.add(&parent);
     }
 
     fn add_list(list_box: &gtk::Box){
@@ -57,9 +70,10 @@ impl<'a> HomeFragment<'a> {
 
 impl<'a> Fragment<'a> for HomeFragment<'a> {
 
-    fn new(parent: &'a gtk::Box, root_pane: gtk::Box) -> HomeFragment<'a> {
+    fn new(fragment_root: &'a gtk::Frame) -> HomeFragment<'a> {
+        let root_pane = <HomeFragment<'a> as Fragment>::create(fragment_root);
         HomeFragment {
-            parent,
+            fragment_root,
             root_pane
         }
     }
@@ -67,8 +81,17 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
     fn on_create(&self){
         println!("Created frag");
 
+
+        let aspect = gtk::Box::new(Orientation::Horizontal, 0);
+        aspect.set_hexpand(true);
+        aspect.set_vexpand(true);
+        aspect.set_widget_name("header");
+        self.root_pane.add(&aspect);
+
         //self.parent.set_widget_name("splash2");
         //self.parent.set_orientation(Orientation::Vertical);
+
+        /*
 
         let scrolled_pane = gtk::ScrolledWindow::new(gtk::NONE_ADJUSTMENT, gtk::NONE_ADJUSTMENT);
         scrolled_pane.set_vexpand(true);
@@ -79,19 +102,20 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         list_box.set_hexpand(true);
         scrolled_pane.add(&list_box);
 
-        HomeFragment::add_header(&scrolled_pane, &list_box);
-        HomeFragment::add_list(&list_box);
-        HomeFragment::add_list(&list_box);
-        HomeFragment::add_list(&list_box);
+        //HomeFragment::add_header(&scrolled_pane, &list_box);
+        //HomeFragment::add_list(&list_box);
+        //HomeFragment::add_list(&list_box);
+        //HomeFragment::add_list(&list_box);
 
         self.root_pane.add(&scrolled_pane);
+        */
     }
 
-    fn get_parent(&self) -> &'a gtk::Box {
-        self.parent
+    fn get_fragment_root(&self) -> &'a gtk::Frame {
+        self.fragment_root
     }
 
-    fn get_root(&self) -> &gtk::Box {
+    fn get_root(&self) -> &gtk::Frame {
         &self.root_pane
     }
 

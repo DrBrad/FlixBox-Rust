@@ -2,9 +2,15 @@ use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Im
 
 pub trait Fragment<'a> {
 
-    fn new(parent: &'a gtk::Box, root_pane: gtk::Box) -> Self
+    fn new(fragment_root: &'a gtk::Frame) -> Self
         where
             Self: Sized; // To allow calling new only on Sized types
+
+    fn create(fragment_root: &gtk::Frame) -> gtk::Frame {
+        let root = gtk::Frame::new(None);
+        fragment_root.add(&root);
+        root
+    }
 
     fn on_create(&self){
         println!("Created - PARENT");
@@ -22,9 +28,9 @@ pub trait Fragment<'a> {
 
     }
 
-    fn get_parent(&self) -> &'a gtk::Box;
+    fn get_fragment_root(&self) -> &'a gtk::Frame;
 
-    fn get_root(&self) -> &gtk::Box;
+    fn get_root(&self) -> &gtk::Frame;
 
     /*
     SOMEHOW HAVE THE ABILITY TO SWAP FRAGMENTS...

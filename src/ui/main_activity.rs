@@ -5,11 +5,12 @@ use ui::int::activity::Activity;
 use ui::int::fragment::Fragment;
 use ui::fragments::home_fragment::HomeFragment;
 use crate::ui;
+use crate::ui::latest_activity::LatestActivity;
 
 
 pub struct MainActivity<'a> {
     window: &'a gtk::Window,
-    root_pane: gtk::Box
+    root_pane: gtk::Frame
 }
 
 impl<'a> MainActivity<'a> {
@@ -27,7 +28,8 @@ impl<'a> MainActivity<'a> {
 
 impl<'a> Activity<'a> for MainActivity<'a> {
 
-    fn new(window: &'a gtk::Window, root_pane: gtk::Box) -> MainActivity<'a> {
+    fn new(window: &'a gtk::Window) -> MainActivity<'a> {
+        let root_pane = <LatestActivity<'a> as Activity>::create(window);
         MainActivity {
             window,
             root_pane
@@ -51,10 +53,10 @@ impl<'a> Activity<'a> for MainActivity<'a> {
 
         parent.add(&left_nav);
 
-        let fragment_root = gtk::Box::new(Orientation::Horizontal, 0);
+        let fragment_root = gtk::Frame::new(None);
         parent.add(&fragment_root);
 
-        let home = HomeFragment::new(&parent, fragment_root);
+        let home = HomeFragment::new(&fragment_root);
         home.on_create();
     }
 
@@ -62,7 +64,7 @@ impl<'a> Activity<'a> for MainActivity<'a> {
         self.window
     }
 
-    fn get_root(&self) -> &gtk::Box {
+    fn get_root(&self) -> &gtk::Frame {
         &self.root_pane
     }
 }

@@ -1,10 +1,12 @@
 use gtk::{ButtonExt, ContainerExt, CssProvider, CssProviderExt, GtkWindowExt, Image, Orientation, WidgetExt, Window, WindowType};
 use gdk_pixbuf::Pixbuf;
+use crate::ui::fragments::home_fragment::HomeFragment;
 use crate::ui::int::activity::Activity;
+use crate::ui::int::fragment::Fragment;
 
 pub struct LatestActivity<'a> {
     window: &'a gtk::Window,
-    root_pane: gtk::Box
+    root_pane: gtk::Frame
 }
 
 impl<'a> LatestActivity<'a> {
@@ -21,7 +23,8 @@ impl<'a> LatestActivity<'a> {
 
 impl<'a> Activity<'a> for LatestActivity<'a> {
 
-    fn new(window: &'a gtk::Window, root_pane: gtk::Box) -> LatestActivity<'a> {
+    fn new(window: &'a gtk::Window) -> LatestActivity<'a> {
+        let root_pane = <LatestActivity<'a> as Activity>::create(window);
         LatestActivity {
             window,
             root_pane
@@ -40,7 +43,7 @@ impl<'a> Activity<'a> for LatestActivity<'a> {
         self.window
     }
 
-    fn get_root(&self) -> &gtk::Box {
+    fn get_root(&self) -> &gtk::Frame {
         &self.root_pane
     }
 
