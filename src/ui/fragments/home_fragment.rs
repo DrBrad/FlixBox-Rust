@@ -118,9 +118,4 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
     fn get_root(&self) -> &gtk::Frame {
         &self.root_pane
     }
-
-
-    //fn getRootPane(&self) -> &Self::RootPane {
-    //    &self.root_pane
-    //}
 }
