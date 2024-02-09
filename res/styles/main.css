@@ -63,6 +63,11 @@ scrollbar.vertical slider, scrollbar.horizontal slider {
     background-size: cover;
 }
 
+.cell {
+    background-color: red;
+    margin: 0 20px;
+}
+
 /*
 #fixed {
     background-color: transparent;

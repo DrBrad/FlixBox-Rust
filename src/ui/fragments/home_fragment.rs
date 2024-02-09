@@ -49,11 +49,21 @@ impl<'a> HomeFragment<'a> {
     }
 
     fn add_list(list_box: &gtk::Box){
-        let root = gtk::Box::new(Orientation::Horizontal, 0);
-        root.set_property_width_request(200);
-        root.set_property_height_request(500);
+        let scrolled_pane = gtk::ScrolledWindow::new(gtk::NONE_ADJUSTMENT, gtk::NONE_ADJUSTMENT);
+        scrolled_pane.set_policy(gtk::PolicyType::Automatic, gtk::PolicyType::Never);
 
-        list_box.add(&root);
+        let genre_box = gtk::Box::new(Orientation::Horizontal, 0);
+        scrolled_pane.add(&genre_box);
+
+        for i in 0..20 {
+            let cell = gtk::Box::new(Orientation::Horizontal, 0);
+            cell.set_property_width_request(200);
+            cell.set_property_height_request(150);
+            cell.get_style_context().add_class("cell");
+            genre_box.add(&cell);
+        }
+
+        list_box.add(&scrolled_pane);
     }
 }
 
@@ -80,8 +90,8 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         scrolled_pane.add(&list_box);
 
         HomeFragment::add_header(&scrolled_pane, &list_box);
-        //HomeFragment::add_list(&list_box);
-        //HomeFragment::add_list(&list_box);
+        HomeFragment::add_list(&list_box);
+        HomeFragment::add_list(&list_box);
         //HomeFragment::add_list(&list_box);
 
         for i in 0..20 {
