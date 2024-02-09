@@ -82,6 +82,45 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
     fn on_create(&self){
         println!("Created frag");
 
+
+        let scrolled_window = gtk::ScrolledWindow::new(None::<&gtk::Adjustment>, None::<&gtk::Adjustment>);
+        scrolled_window.set_policy(gtk::PolicyType::Automatic, gtk::PolicyType::Automatic);
+
+        let box_layout = gtk::Box::new(Orientation::Vertical, 0);
+        scrolled_window.add(&box_layout);
+
+        // Header with aspect ratio 16:9
+        let header_aspect_frame = gtk::AspectFrame::new(None, 0.5, 0.5, 16.0 / 9.0, false);
+        // Fill width horizontally
+        header_aspect_frame.set_property_expand(true);
+        header_aspect_frame.set_widget_name("header");
+        // Add your header content here, for example an image
+        // let header_image = gtk::Image::new_from_file("header_image.png");
+        // header_aspect_frame.add(&header_image);
+        box_layout.add(&header_aspect_frame);
+
+        // Add labels or other content
+        for i in 0..20 {
+            let label = gtk::Label::new(Some(&format!("Label {}", i)));
+            box_layout.add(&label);
+        }
+
+        self.root_pane.add(&scrolled_window);
+
+        /*
+        let flow_box = gtk::FlowBox::new();
+        flow_box.set_homogeneous(false); // Optional: Set to true if you want children to have equal sizes
+
+        for i in 0..10 {
+            let label = gtk::Label::new(Some(&format!("Label {}", i)));
+            flow_box.add(&label);
+        }
+
+        self.root_pane.add(&flow_box);
+        */
+
+
+        /*
         let scrolled_pane = gtk::ScrolledWindow::new(gtk::NONE_ADJUSTMENT, gtk::NONE_ADJUSTMENT);
         scrolled_pane.set_vexpand(true);
         scrolled_pane.set_hexpand(true);
@@ -96,7 +135,7 @@ impl<'a> Fragment<'a> for HomeFragment<'a> {
         let list_box = gtk::Box::new(Orientation::Vertical, 0);
         list_box.set_vexpand(true);
         list_box.set_hexpand(true);
-        scrolled_pane.add(&list_box);
+        scrolled_pane.add(&list_box);*/
 
         /*
         let aspect = gtk::Frame::new(None);
