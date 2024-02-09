@@ -34,7 +34,6 @@ impl<'a> HomeFragment<'a> {
 
         list_box.add(&aspect_frame);
 
-        let aspect_ratio = 16.0 / 9.0;
 
         scroll_pane.connect_size_allocate(move |_, allocation| {
             // Get the new width and height of the widget
