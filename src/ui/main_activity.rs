@@ -29,7 +29,7 @@ impl<'a> MainActivity<'a> {
 impl<'a> Activity<'a> for MainActivity<'a> {
 
     fn new(window: &'a gtk::Window) -> MainActivity<'a> {
-        let root_pane = <LatestActivity<'a> as Activity>::create(window);
+        let root_pane = <MainActivity<'a> as Activity>::create(window);
         MainActivity {
             window,
             root_pane
